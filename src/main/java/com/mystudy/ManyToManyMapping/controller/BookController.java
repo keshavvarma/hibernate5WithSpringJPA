@@ -6,6 +6,8 @@ package com.mystudy.ManyToManyMapping.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,7 +35,7 @@ public class BookController {
 	
 	@ResponseBody
 	@PostMapping(path="new.do")
-	public Map<Object, Object> save(@RequestBody Book book){
+	public Map<Object, Object> save(@RequestBody @Valid Book book){
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("post", bookService.save(book));
 		return map;
@@ -56,7 +58,7 @@ public class BookController {
 	}
 	
 	@ResponseBody
-	@GetMapping(path="findAll.do")
+	@GetMapping(path="findAll.do", produces="application/json")
 	public Map<Object, Object> findAll(){
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("books", bookService.findAll());

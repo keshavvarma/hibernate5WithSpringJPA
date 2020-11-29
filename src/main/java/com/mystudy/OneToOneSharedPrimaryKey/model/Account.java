@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="account_master")
 public class Account {
 	@Id
-    private Long id;
+    private Long employeeId;
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name="employee_id")
@@ -33,7 +33,7 @@ public class Account {
 	@Column(name="bank_name")
 	private String bankName;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -52,11 +52,10 @@ public class Account {
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
 	}
-	public Long getId() {
-		return id;
+	public Long getEmployeeId() {
+		return employeeId;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
 	}
-	
 }

@@ -5,6 +5,7 @@ package com.mystudy.OneToOneUsingJoinTable.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class User {
 	private String userName;
 	//@JsonBackReference
 	@JsonIgnoreProperties("user")
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinTable(name="user_vehicle_master",
 		joinColumns = {@JoinColumn(name="user_id", referencedColumnName="user_id")},
 		inverseJoinColumns = {@JoinColumn(name="vehicle_id", referencedColumnName="vehicle_id")}

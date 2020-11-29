@@ -21,6 +21,9 @@ public class Team {
 	private long teamId;
 	@Column(name="team_code")
 	private String teamCode;
+	
+	public Team() {
+	}
 	public long getTeamId() {
 		return teamId;
 	}

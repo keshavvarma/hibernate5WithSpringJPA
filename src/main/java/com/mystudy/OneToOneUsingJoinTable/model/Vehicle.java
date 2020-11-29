@@ -5,6 +5,7 @@ package com.mystudy.OneToOneUsingJoinTable.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Vehicle {
 	private String vehicleNumber;
 	//@JsonManagedReference
 	@JsonIgnoreProperties("vehicle")
-	@OneToOne(mappedBy="vehicle")
+	@OneToOne(mappedBy="vehicle", fetch=FetchType.LAZY)
 	private User user;
 	public Long getVehicleId() {
 		return vehicleId;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mystudy.OneToOneSharedPrimaryKey.model.Employee;
@@ -47,4 +48,24 @@ public class EmployeeController {
 		map.put("data", employeeListWithAccountDetails);
 		return map;
 	}
+	
+	@ResponseBody
+	@GetMapping(path = "/findAll.do")
+	public Map<Object, Object> findAll() {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		List<Employee> employeeListWithAccountDetails = new ArrayList<Employee>();
+		employeeListWithAccountDetails = employeeService.findAllEmployeeWithAccountDetails();
+		map.put("data", employeeListWithAccountDetails);
+		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping(path = "/find.do")
+	public Map<Object, Object> find(@RequestParam(name="employeeId") long employeeId) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		List<Employee> employeeListWithAccountDetails = new ArrayList<Employee>();
+		map.put("data", employeeService.find(employeeId));
+		return map;
+	}
+	
 }

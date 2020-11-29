@@ -5,6 +5,8 @@ package com.mystudy.ManyToManyMapping.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import com.mystudy.ManyToManyMapping.model.Book;
  *
  */
 @Service
+@Transactional
 public class BookService {
 	@Autowired
 	BookDao bookDao;

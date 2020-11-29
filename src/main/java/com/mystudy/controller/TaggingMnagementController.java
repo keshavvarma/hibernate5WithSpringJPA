@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mystudy.model.Team;
-import com.mystudy.service.TeamService;
+import com.mystudy.service.TaggingManagementService;
 
 /**
  * @author Keshav
@@ -22,17 +21,18 @@ import com.mystudy.service.TeamService;
  */
 
 @Controller
-@RequestMapping("/team")
-public class TeamController {
+@RequestMapping("/tagging")
+public class TaggingMnagementController {
 	@Autowired
-	TeamService teamService;
+	TaggingManagementService taggingmanagementervice;
 
 	@ResponseBody
 	@PostMapping(path = "/new.do")
-	public Map<Object, Object> saveTest(@RequestBody Team team) {
+	public Map<Object, Object> tagTeam(@RequestBody Map<String, String> reqMap) {
+		long teamId = Long.parseLong(reqMap.get("teamId"));
+		long userId = Long.parseLong(reqMap.get("userId"));
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		Team team2 = teamService.saveTeam(team);
-		map.put("data", team2);
+		map.put("data", taggingmanagementervice.tagTeam(teamId, userId));
 		return map;
 	}
 }

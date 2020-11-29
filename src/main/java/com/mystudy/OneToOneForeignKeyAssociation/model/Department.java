@@ -5,6 +5,7 @@ package com.mystudy.OneToOneForeignKeyAssociation.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Department {
 	private long departmentId;
 	@Column(name="department_name")
 	private String departmentName;
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="staff_id")
 	private Staff staff;
 	public long getDepartmentId() {

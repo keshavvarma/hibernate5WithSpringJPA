@@ -3,7 +3,6 @@
  */
 package com.mystudy.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -11,17 +10,33 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.mystudy.formatter.CustomLocalDateTimeSerializer;
+
 /**
  * @author Keshav
  *
  */
 @MappedSuperclass
 public class TableOperation {
+	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	//@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	//@JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="created_on", nullable=true)
 	private LocalDateTime createdOn;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="updated_on", nullable=true)
+	@JsonSerialize(using = CustomLocalDateTimeSerializer.class)
 	private LocalDateTime updatedOn;
 	@Column(name="deleted_on", nullable=true)
+	@JsonSerialize(using = CustomLocalDateTimeSerializer.class)
 	private LocalDateTime deletedOn;
 	@Column(name="created_by", nullable=true)
 	private Long createdBy;

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Keshav
@@ -25,6 +26,8 @@ public class Employee {
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
+	@Transient
+	private Account account;
 	
 	public long getEmployeeId() {
 		return employeeId;
@@ -43,6 +46,12 @@ public class Employee {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	@Override
 	public String toString() {

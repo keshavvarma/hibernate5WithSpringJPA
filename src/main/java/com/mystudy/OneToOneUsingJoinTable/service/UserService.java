@@ -27,4 +27,8 @@ public class UserService {
 	public User find(long userId) {
 		return userDao.find(userId);
 	}
+
+	public User findUserAndVehicleByUserId(long userId) {
+		return userDao.findUserAndVehicleByUserId(userId);
+	}
 }

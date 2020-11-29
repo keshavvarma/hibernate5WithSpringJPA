@@ -27,7 +27,9 @@ public class BookDao {
 	EntityManager entityManager;
 	
 	public Book save(Book book) {
-		return bookRepository.save(book);
+		entityManager.persist(book);
+		//return bookRepository.save(book);
+		return book;
 	}
 	
 	public List<Book> findAll(){

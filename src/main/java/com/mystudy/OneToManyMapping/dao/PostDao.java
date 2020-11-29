@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mystudy.OneToManyMapping.model.Post;
+import com.mystudy.repository.CommentRepository;
 import com.mystudy.repository.PostRepository;
 
 /**
@@ -20,11 +21,26 @@ import com.mystudy.repository.PostRepository;
 public class PostDao {
 	@Autowired
 	PostRepository postRepository;
+	@Autowired
+	CommentRepository commentRepository;
 	@PersistenceContext
 	EntityManager entityManager;
 	
+	@Transactional
 	public Post save(Post post) {
-		return postRepository.save(post);
+		Post post2 = postRepository.save(post);
+		commentRepository.saveAll(post.getComments());
+		return post2;
+	}
+	
+	@Transactional
+	public Post saveCascadePersist(Post post) {
+		post.getComments().forEach(c -> {
+			c.setPost(post);
+		});
+		postRepository.save(post);
+		//entityManager.persist(post);
+		return post;
 	}
 
 	@Transactional

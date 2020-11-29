@@ -41,4 +41,12 @@ public class UserDao{
 		}
 		return null;
 	}
+
+	public User findUserAndVehicleByUserId(long userId) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(" select u from User u left join fetch u.vehicle v")
+		.append(" where u.userId = u.vehicle.user.userId")
+		.append(" and u.userId = :userId");
+		return entityManager.createQuery(sb.toString(), User.class).setParameter("userId", userId).getSingleResult();
+	}
 }

@@ -64,4 +64,12 @@ public class EmployeeAccountController {
 		map.put("data", employeeAccountService.getAccountByEmployeeId(employeeId));*/
 		return new ModelAndView("account", "account", employeeAccountService.getAccountByEmployeeId(employeeId));
 	}
+	
+	@ResponseBody
+	@GetMapping(path = "/findEmployeeAndAccountDetials.do")
+	public Map<Object, Object> findEmployeeAndAccountDetials() {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("data", employeeAccountService.findEmployeeAndAccountDetials());
+		return map;
+	}
 }

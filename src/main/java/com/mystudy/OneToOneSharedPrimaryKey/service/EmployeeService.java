@@ -25,6 +25,10 @@ public class EmployeeService {
 	}
 
 	public List<Employee> findAllEmployeeWithAccountDetails() {
-		return employeeDao.findAllEmployeeWithAccountDetails();
+		return employeeDao.findAll();
+	}
+
+	public Employee find(long employeeId) {
+		return employeeDao.find(employeeId);
 	}
 }

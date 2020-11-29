@@ -30,7 +30,7 @@ public class Comment {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="comment_id")
 	private long commentId;
-	@Column(name="comment")
+	@Column(name="comment", nullable=false)
 	private String comment;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="post_id")

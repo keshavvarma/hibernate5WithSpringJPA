@@ -18,9 +18,7 @@ public class TeamService {
 	@Autowired
 	TeamDao teamDao;
 	
-	public Team saveTeam() {
-		Team team = new Team();
-		team.setTeamCode("Team A");
+	public Team saveTeam(Team team) {
 		return teamDao.save(team);
 	}
 }

@@ -32,4 +32,9 @@ public class EmployeeAccountService {
 		return employeeAccountDao.findAll();
 	}
 	
+	
+	public List<Account> findEmployeeAndAccountDetials() {
+		return employeeAccountDao.findEmployeeAndAccountDetials();
+	}
+	
 }

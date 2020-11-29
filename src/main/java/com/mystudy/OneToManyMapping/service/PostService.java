@@ -19,7 +19,8 @@ public class PostService {
 	PostDao postDao;
 	
 	public Post save(Post post) {
-		return postDao.save(post);
+		//return postDao.save(post);
+		return postDao.saveCascadePersist(post);
 	}
 
 	public Post find(long postId) {

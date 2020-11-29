@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -37,7 +38,7 @@ public class JpaConfig {
         final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPackagesToScan(new String[] {
-            "com.mystudy.*"
+            "com.mystudy.*", "com.mystudy.OneToManyMapping.service.*"
         });
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -73,6 +74,20 @@ public class JpaConfig {
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
+    
+   /* @Bean
+    public PlatformTransactionManager transactionManager(){
+       JpaTransactionManager transactionManager
+         = new JpaTransactionManager();
+       transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+       transactionManager.setRollbackOnCommitFailure(true);
+       return transactionManager;
+    }*/
+    
+   /* @Bean
+    public PlatformTransactionManager transactionManager(){
+    	return new DataSourceTransactionManager(dataSource());
+    }*/
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {

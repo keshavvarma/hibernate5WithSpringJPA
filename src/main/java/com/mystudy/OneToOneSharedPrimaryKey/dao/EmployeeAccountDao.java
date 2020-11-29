@@ -43,7 +43,7 @@ public class EmployeeAccountDao{
 	public Account findByEmployeeId(long employeeId) {
 		Optional<Account> optional = employeeAccountRepository.findById(employeeId);
 		if(optional.isPresent()) {
-			optional.get().setEmployee(null);
+			//optional.get().setEmployee(null);
 			return optional.get();
 		}
 		return null;
@@ -51,5 +51,10 @@ public class EmployeeAccountDao{
 
 	public List<Account> findAll() {
 		return employeeAccountRepository.findAll();
+	}
+	
+	public List<Account> findEmployeeAndAccountDetials() {
+		return entityManager.createQuery("select a from Account a inner join fetch a.employee e", Account.class).getResultList();
+		//return employeeAccountRepository.findAll();
 	}
 }

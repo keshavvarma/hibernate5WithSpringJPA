@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,7 @@ import com.mystudy.OneToManyMapping.service.CommentService;
  *
  */
 @Controller
+//@Transactional(propagation = Propagation.REQUIRES_NEW)
 @RequestMapping(path="comment")
 public class CommentController {
 	@Autowired
@@ -51,7 +54,14 @@ public class CommentController {
 	@PostMapping(path="saveAll.do")
 	public Map<Object, Object> saveAll(@RequestBody List<Comment> comments, @RequestParam(name="postId") long postId){
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("comments", commentService.saveAll(comments, postId));
+		comments.add(new Comment());
+		try {
+			map.put("comments", commentService.saveAll(comments, postId));
+		} catch (Exception e) {
+			System.out.println("Exception name = " + e.getClass());
+			System.out.println("Description = " + e);
+			map.put("comments", "comments not added");
+		}
 		return map;
 	}
 	
